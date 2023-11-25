@@ -11,14 +11,15 @@ public class StringCalculator {
         String numbersWithoutDelimiter = numbers;
 
         if (numbers.startsWith("//")) {
-            int delimiterIndex = numbers.indexOf("\n");
-            if (delimiterIndex != -1) {
-                delimiter = numbers.substring(2, delimiterIndex);
-                numbersWithoutDelimiter = numbers.substring(delimiterIndex + 1);
+            int delimiterStart = numbers.indexOf("[");
+            int delimiterEnd = numbers.indexOf("]");
+            if (delimiterStart != -1 && delimiterEnd != -1) {
+                delimiter = numbers.substring(delimiterStart + 1, delimiterEnd);
+                numbersWithoutDelimiter = numbers.substring(numbers.indexOf("\n") + 1);
             }
         }
 
-        String[] numbersArray = numbersWithoutDelimiter.split("[," + delimiter + "\n]");
+        String[] numbersArray = numbersWithoutDelimiter.split("\\Q" + delimiter + "\\E|,|\n");
 
         int sum = 0;
         List<Integer> negativeNumbers = new ArrayList<>();
@@ -48,7 +49,7 @@ public class StringCalculator {
     }
 
     public static void main(String[] args) {
-        String numbers = "//[*]\n1111*1000*3,4\n4445";
+        String numbers = "//[***]\n1***2,3***4\n5";
 
         try {
             System.out.println("Result: " + new StringCalculator().add(numbers));
