@@ -7,22 +7,21 @@ public class StringCalculatorTest {
     StringCalculator str = new StringCalculator();
 
     @Test
-    public void test_11() {
+    public void test_21() {
         assertEquals(0, str.add(""));
     }
 
     @Test
-    public void test_12() {
+    public void test_22() {
         assertEquals(1, str.add("1"));
     }
-
     @Test
-    public void test_13() {
+    public void test_23() {
         assertEquals(3, str.add("1,2"));
     }
-
     @Test
-    public void test_14() {
-        assertThrows(IllegalArgumentException.class, () -> str.add("1,2,3"));
+    public void test_24() {
+        assertEquals(15, str.add("1,2,3,4,5"));
     }
+
 }
