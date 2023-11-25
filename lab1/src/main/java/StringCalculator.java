@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class StringCalculator {
     public int add(String numbers) {
         if (numbers.isEmpty()) {
@@ -18,22 +21,32 @@ public class StringCalculator {
         String[] numbersArray = numbersWithoutDelimiter.split("[," + delimiter + "\n]");
 
         int sum = 0;
+        List<Integer> negativeNumbers = new ArrayList<>();
+
         for (String element : numbersArray) {
-            if (!element.trim().isEmpty()) {
-                sum += Integer.parseInt(element);
-            }
-        }
-        for(String elements : numbersArray){
-            if(elements.trim().isEmpty()){
+            if(element.trim().isEmpty()) {
                 throw new IllegalArgumentException("Multiple delimiters not allowed.");
             }
+            if (!element.trim().isEmpty()) {
+                int num = Integer.parseInt(element);
+
+                if (num < 0) {
+                    negativeNumbers.add(num);
+                }
+
+                sum += num;
+            }
+        }
+
+        if (!negativeNumbers.isEmpty()) {
+            throw new IllegalArgumentException("Negative numbers not allowed. \nNegative numbers: " + negativeNumbers);
         }
 
         return sum;
     }
 
     public static void main(String[] args) {
-        String numbers = "//[*]\n1,2*3,4\n5";
+        String numbers = "//[*]\n-1*2*-3,4\n-5";
 
         try {
             System.out.println("Result: " + new StringCalculator().add(numbers));

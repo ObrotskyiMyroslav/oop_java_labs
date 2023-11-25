@@ -7,33 +7,38 @@ public class StringCalculatorTest {
     StringCalculator str = new StringCalculator();
 
     @Test
-    public void test_41() {
+    public void test_51() {
         assertEquals(0, str.add(""));
     }
 
     @Test
-    public void test_42() {
+    public void test_52() {
         assertEquals(1, str.add("1"));
     }
     @Test
-    public void test_43() {
+    public void test_53() {
         assertEquals(3, str.add("1,2"));
     }
     @Test
-    public void test_44() {
+    public void test_54() {
         assertEquals(15, str.add("1,2,3,4\n5"));
     }
     @Test
-    public void test_45(){
+    public void test_55(){
         assertThrows(IllegalArgumentException.class, () -> str.add("1,2,3,4,\n5"));
     }
     @Test
-    public void test_46() {
+    public void test_56() {
         assertEquals(15, str.add("//[*]\n1*2*3*4*5"));
     }
     @Test
-    public void test_47() {
+    public void test_57() {
         assertEquals(21, str.add("//[*]\n1,2,3*4\n5*6"));
     }
+    @Test
+    public void test_58(){
+        assertThrows(IllegalArgumentException.class, () -> str.add("//[*]\n-1,-2,3,-4,\n5"));
+    }
+
 
 }
