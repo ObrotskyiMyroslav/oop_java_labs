@@ -33,7 +33,9 @@ public class StringCalculator {
                 if (num < 0) {
                     negativeNumbers.add(num);
                 }
-
+                if(num > 1000){
+                    continue;
+                }
                 sum += num;
             }
         }
@@ -46,7 +48,7 @@ public class StringCalculator {
     }
 
     public static void main(String[] args) {
-        String numbers = "//[*]\n-1*2*-3,4\n-5";
+        String numbers = "//[*]\n1111*1000*3,4\n4445";
 
         try {
             System.out.println("Result: " + new StringCalculator().add(numbers));
